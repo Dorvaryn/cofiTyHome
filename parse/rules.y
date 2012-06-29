@@ -597,33 +597,33 @@ parseConfig:
             printf("\tConnect to IP: %s on Port: %s\n",$2, $4);
             printf("\tListen on Port: %s\n", $6);
             */
-            if((conIP = malloc(strlen($2)*sizeof(char))) == NULL)
-            {
-                fprintf(stderr, "No Memory!\n");
-                exit(ERROR);
-            }
-            memcpy(conIP, $2, strlen($2));
+
+            conIP = $2;
 
             conPort = atoi($4);
             lisPort = atoi($6);
             
-            if((nameLogSensors =
-            malloc((strlen($10)+strlen(LOG_EXT))*sizeof(char))) == NULL)
+            int lenght = strlen($10) + strlen(LOG_EXT); 
+            if((nameLogSensors = malloc(lenght*sizeof(char))) == NULL)
             {
                 fprintf(stderr, "No Memory!\n");
                 exit(ERROR);
             }
             memcpy(nameLogSensors, $10, strlen($10));
+            nameLogSensors[strlen($10)]='\0';
             strcat(nameLogSensors, LOG_EXT);
+            nameLogSensors[lenght]='\0';
             
-            if((nameLogRules =
-            malloc((strlen($8)+strlen(LOG_EXT))*sizeof(char))) == NULL)
+            lenght = strlen($8) + strlen(LOG_EXT); 
+            if((nameLogRules =  malloc(lenght*sizeof(char))) == NULL)
             {
                 fprintf(stderr, "No Memory!\n");
                 exit(ERROR);
             }
             memcpy(nameLogRules, $8, strlen($8));
+            nameLogRules[strlen($8)]='\0';
             strcat(nameLogRules, LOG_EXT);
+            nameLogRules[lenght]='\0';
             
             /*printf("### Copied ###\n");*/
             printf("\tConnect to IP: %s on Port: %d\n", conIP, conPort);

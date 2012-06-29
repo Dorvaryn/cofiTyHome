@@ -34,6 +34,7 @@ typedef enum {
     F_SENSORS = 4
 }FileTypes;
 
+
 /**
  * Extension that we use for logs.
  */

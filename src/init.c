@@ -23,7 +23,7 @@ void init()
   initRules();
   startTimedCheck(60);
 
-  sensorsNetworkStart();
+  //sensorsNetworkStart();
   guiNetworkStart();
 
 }
@@ -31,7 +31,7 @@ void init()
 void destroy()
 {
   guiNetworkStop();
-  sensorsNetworkStop();
+  //sensorsNetworkStop();
 
   stopTimedCheck();
   stopRules();

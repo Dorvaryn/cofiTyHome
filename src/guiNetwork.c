@@ -14,10 +14,11 @@
 #include "guiInterface.h"
 #include "common.h"
 
+
 typedef struct Client *PClient;
 
 /**
- * Structure GUI Client Informations
+ * Structure Client Informations
  **/
 typedef struct Client {
   PClient next;
@@ -29,7 +30,7 @@ typedef struct Client {
 }Client;
 
 /**
- * Structure List of GUI Clients
+ * Structure List of Clients
  **/
 typedef struct {
   PClient first;
@@ -74,7 +75,7 @@ void * guiMsgRec(void* data){
 
   for(;;)
   {
-    /* reception form sensors */
+    /* reception from gui */
     nb = recv(client->sock, buff, 8192, 0);
     FAIL(nb);
     if(strlen(buff) == 0){
