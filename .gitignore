@@ -1,9 +1,8 @@
-/TestIntegration/nbproject/private/
-/GHome/nbproject/private/
-/GHome/build/Debug/
 CofiTyHome
 GHome.log
 *.log
-*.mp3
-/TestPushKey/nbproject/private/
-/TestPushKey/build/Debug/
+sortieTst
+src/lex.yy.c
+src/rules.tab.c
+src/rules.tab.h
+config/config

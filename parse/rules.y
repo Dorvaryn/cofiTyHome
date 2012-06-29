@@ -12,8 +12,6 @@
     #include "../src/init.h"
 
     #include "../libHeaders/json.h"
-    
-    #include "../../kernel/memory/memory.h"
 
     int parsedFlag;
     void clean();
@@ -161,7 +159,7 @@ initSensor:
 {
     struct sensorType * old = currentSensor;
 
-    if((currentSensor = gMalloc(sizeof(struct sensorType))) == NULL)
+    if((currentSensor = malloc(sizeof(struct sensorType))) == NULL)
     {
 		fprintf(stderr, "No Memory\n");
         exit(ERROR);
@@ -180,7 +178,7 @@ typeSensor:
 {
     currentSensor->type = INTERRUPTEUR;
 
-    if((currentSensor->data = gMalloc(sizeof(dataINTERRUPTEUR))) == NULL)
+    if((currentSensor->data = malloc(sizeof(dataINTERRUPTEUR))) == NULL)
     {
 		fprintf(stderr, "No Memory\n");
         exit(ERROR);
@@ -194,7 +192,7 @@ typeSensor:
     currentSensor->type = PRESENCE;
 
 
-    if((currentSensor->data = gMalloc(sizeof(dataPRESENCE))) == NULL)
+    if((currentSensor->data = malloc(sizeof(dataPRESENCE))) == NULL)
     {
 		fprintf(stderr, "No Memory\n");
         exit(ERROR);
@@ -207,7 +205,7 @@ typeSensor:
 {
     currentSensor->type = TEMPERATURE;
 
-    if((currentSensor->data = gMalloc(sizeof(dataTEMPERATURE))) == NULL)
+    if((currentSensor->data = malloc(sizeof(dataTEMPERATURE))) == NULL)
     {
 		fprintf(stderr, "No Memory\n");
         exit(ERROR);
@@ -220,7 +218,7 @@ typeSensor:
 {
     currentSensor->type = CONTACT;
 
-    if((currentSensor->data = gMalloc(sizeof(dataCONTACT))) == NULL)
+    if((currentSensor->data = malloc(sizeof(dataCONTACT))) == NULL)
     {
 		fprintf(stderr, "No Memory\n");
         exit(ERROR);
@@ -233,7 +231,7 @@ typeSensor:
 {
     currentSensor->type = HORLOGE;
 
-    if((currentSensor->data = gMalloc(sizeof(dataHORLOGE))) == NULL)
+    if((currentSensor->data = malloc(sizeof(dataHORLOGE))) == NULL)
     {
 		fprintf(stderr, "No Memory\n");
         exit(ERROR);
@@ -261,7 +259,7 @@ initActionneur:
 {
     struct actionneur_t * old = currentActionneur;
 
-    if((currentActionneur = gMalloc(sizeof(struct actionneur_t))) == NULL)
+    if((currentActionneur = malloc(sizeof(struct actionneur_t))) == NULL)
     {
 		fprintf(stderr, "No Memory\n");
         exit(ERROR);
@@ -342,7 +340,7 @@ actionId:
 {
     struct action_t * old = currentAction;
 
-    if((currentAction = gMalloc(sizeof(struct action_t))) == NULL)
+    if((currentAction = malloc(sizeof(struct action_t))) == NULL)
     {
 		fprintf(stderr, "No Memory\n");
         exit(ERROR);
@@ -368,7 +366,7 @@ oneActionneurFct:
 {
     struct actionFct_t * old = currentActionFct;
 
-    if((currentActionFct = gMalloc(sizeof(struct actionFct_t))) == NULL)
+    if((currentActionFct = malloc(sizeof(struct actionFct_t))) == NULL)
     {
 		fprintf(stderr, "No Memory\n");
         exit(ERROR);
@@ -406,7 +404,7 @@ ruleid:
 
     struct rule_t * old = currentRule;
 
-    if((currentRule = gMalloc(sizeof(struct rule_t))) == NULL)
+    if((currentRule = malloc(sizeof(struct rule_t))) == NULL)
     {
 		fprintf(stderr, "No Memory\n");
         exit(ERROR);
@@ -436,7 +434,7 @@ conditionid:
 
     struct condition_t * old = currentCondition;
 
-    if((currentCondition = gMalloc(sizeof(struct condition_t))) == NULL)
+    if((currentCondition = malloc(sizeof(struct condition_t))) == NULL)
     {
 		fprintf(stderr, "No Memory\n");
         exit(ERROR);
@@ -460,7 +458,7 @@ conditionid:
 
     struct condition_t * old = currentCondition;
 
-    if((currentCondition = gMalloc(sizeof(struct condition_t))) == NULL)
+    if((currentCondition = malloc(sizeof(struct condition_t))) == NULL)
     {
         fprintf(stderr, "No Memory\n");
         exit(ERROR);
@@ -599,7 +597,7 @@ parseConfig:
             printf("\tConnect to IP: %s on Port: %s\n",$2, $4);
             printf("\tListen on Port: %s\n", $6);
             */
-            if((conIP = gMalloc(strlen($2)*sizeof(char))) == NULL)
+            if((conIP = malloc(strlen($2)*sizeof(char))) == NULL)
             {
                 fprintf(stderr, "No Memory!\n");
                 exit(ERROR);
@@ -610,7 +608,7 @@ parseConfig:
             lisPort = atoi($6);
             
             if((nameLogSensors =
-            gMalloc((strlen($10)+strlen(LOG_EXT))*sizeof(char))) == NULL)
+            malloc((strlen($10)+strlen(LOG_EXT))*sizeof(char))) == NULL)
             {
                 fprintf(stderr, "No Memory!\n");
                 exit(ERROR);
@@ -619,7 +617,7 @@ parseConfig:
             strcat(nameLogSensors, LOG_EXT);
             
             if((nameLogRules =
-            gMalloc((strlen($8)+strlen(LOG_EXT))*sizeof(char))) == NULL)
+            malloc((strlen($8)+strlen(LOG_EXT))*sizeof(char))) == NULL)
             {
                 fprintf(stderr, "No Memory!\n");
                 exit(ERROR);

@@ -1,6 +1,5 @@
 #include "sensors.h"
 #include "common.h"
-#include "../../kernel/memory/memory.h"
 
 void logValue(char idSensor[SIZE_ID], char nameValue[SIZE_NAME], int value) {
     FILE * pFile;
@@ -161,8 +160,8 @@ void cleanSensors(){
   while(sensors != NULL){
     cSensor = sensors;
     sensors = sensors->nextSensor;
-    gFree(cSensor->data);
-    gFree(cSensor);
+    free(cSensor->data);
+    free(cSensor);
   }
 
 }

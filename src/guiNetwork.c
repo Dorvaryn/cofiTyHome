@@ -14,8 +14,6 @@
 #include "guiInterface.h"
 #include "common.h"
 
-#include "../../kernel/memory/memory.h"
-
 typedef struct Client *PClient;
 
 /**
@@ -56,7 +54,7 @@ void cleanClient(Client * client){
 
     client->next->previous = client->previous;
     client->previous->next = client->next;
-    gFree(client);
+    free(client);
 }
 
 /**
@@ -189,13 +187,13 @@ void * guiNetworkConnexion(){
 
     /* Put Create Client Information in list */
     if(clientList.first == NULL){
-      clientList.first = gMalloc(sizeof(Client));
+      clientList.first = malloc(sizeof(Client));
       clientList.first->next = NULL;
       clientList.first->previous = NULL;
       clientList.current = clientList.first;
     } 
     else{
-      clientList.current = gMalloc(sizeof(Client));
+      clientList.current = malloc(sizeof(Client));
       clientList.current->next = clientList.first;
       clientList.current->previous = NULL;
       clientList.first->previous = clientList.current;
@@ -242,7 +240,7 @@ void guiNetworkStop(){
 
     clientList.current = clientList.first;
     clientList.first = clientList.first->next;
-    gFree(clientList.current);
+    free(clientList.current);
   }
   puts("Closed");
 }

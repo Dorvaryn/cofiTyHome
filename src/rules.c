@@ -2,7 +2,6 @@
 
 #include "rules.h"
 #include "common.h"
-#include "../../kernel/memory/memory.h"
 
 void logRule(char name[SIZE_NAME]) {
 
@@ -156,11 +155,11 @@ void cleanRules(){
     while(startRule->conditions != NULL){
       cCondition = startRule->conditions;
       startRule->conditions = startRule->conditions->nextCondition;
-      gFree(cCondition);
+      free(cCondition);
     }
     cRule = startRule;
     startRule = startRule->nextRule;
-    gFree(cRule);
+    free(cRule);
   }
 
 }

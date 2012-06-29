@@ -1,15 +1,12 @@
 #include <stdio.h>
 
 #include "../libHeaders/json.h"
-#include "../../kernel/memory/memory.h"
 #include "guiInterface.h"
 #include "guiNetwork.h"
 #include "sensors.h"
 #include "actions.h"
 
 #include "common.h"
-
-#include "../../kernel/memory/memory.h"
 
 typedef enum {
   INITIALISE = 1,
@@ -274,7 +271,7 @@ void processTypeHistory(struct json_object* history, mqd_t mqSend)
 
   sprintf(nbStr, "%d", nbValues);
 
-  command = (char *)gMalloc((sizeof(char) 
+  command = (char *)malloc((sizeof(char) 
         * (strlen("grep -i ") 
           + strlen(idStr) 
           + strlen(" ") 
@@ -371,7 +368,7 @@ void readWholeFile(const char * fileName, char ** buffer){
   fseek(file, 0, SEEK_SET);
 
   //Allocate memory
-  *buffer=(char *)gMalloc(fileLen+1);
+  *buffer=(char *)malloc(fileLen+1);
   if (!(*buffer))
   {
     fprintf(stderr, "Memory error!");
@@ -450,7 +447,7 @@ void processTypeEdits(struct json_object * typeId, mqd_t mqSend){
 
   sending = json_object_to_json_string(response);
   guiNetworkSend(sending, strlen(sending), mqSend);
-  gFree(buffer);
+  free(buffer);
 }
 
 /**
@@ -516,7 +513,7 @@ void processTypeEData(struct json_object * fileObj, mqd_t mqSend){
 
   sending = json_object_to_json_string(response);
   guiNetworkSend(sending, strlen(sending), mqSend);
-  gFree(newDataFile);
+  free(newDataFile);
 }
 
 /**

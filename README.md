@@ -1,15 +1,9 @@
-# Projet gHome de l'hexanome h4211 #
+# Projet de server domotique Linux #
 
 ## Auteurs ##
 - Benjamin AUGUSTIN <benjamin@odai.homelinux.net>
-- Vincent BAILLY
-- Moises BALY RODRIGUEZ (E)
-- Jonàs BRU MONSERRAT
-- Yann CHEVALIER
-- Crina COSTEA
-- Mathieu SABOURIN
+- Fork du projet CofiTyHome de l'hexanome h4211
 
 ## Etat ##
-Intégré!
---> Debugging...
+Travail de remodelage en cours
 

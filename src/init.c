@@ -1,6 +1,5 @@
 #include <pthread.h>
 
-#include "../../kernel/memory/memory.h"
 #include "guiNetwork.h"
 #include "sensorsNetwork.h"
 #include "../parse/rules.tab.h"
@@ -16,11 +15,6 @@
 
 void init()
 {
-  printf("Initialisation...\n");
-  initMemory();
-  printf("MemTotale: %ld\n", getGMemTotal());
-  printf("MemFree: %ld\n", getGMemFree());
-
   pthread_mutex_init(&sensorsMutex, NULL);
 
   parseAll();
@@ -44,9 +38,6 @@ void destroy()
   pthread_mutex_destroy(&sensorsMutex);
 
   cleanMemory();
-  gFree(nameLogRules);
-
-  destroyMemory();
 }
 
 void cleanMemory(){

@@ -14,7 +14,6 @@
 
 #include "actions.h"
 #include "sensorsNetwork.h"
-#include "../../kernel/memory/memory.h"
 
 
 // ########################### Actionneurs ###########################

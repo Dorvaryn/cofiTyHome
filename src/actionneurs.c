@@ -19,7 +19,7 @@ void itochar(int toBeTrans, char* buffer, int radix) //max base to transform: 16
 {
   int i = 0, n, reste;
 
-  char* reverseBuffer = (char*) gMalloc((sizeof (buffer) + 1));
+  char* reverseBuffer = (char*) malloc((sizeof (buffer) + 1));
   n = toBeTrans;
   while (n > 0) {
     reste = n % radix;
@@ -67,7 +67,7 @@ void itochar(int toBeTrans, char* buffer, int radix) //max base to transform: 16
   reverseBuffer[i] = '\0';
 
   strncpy(buffer, reverseBuffer, i); //on copie le numero ecrit dans la nouvelle base dans le char recu en parametre
-  gFree(reverseBuffer);//liberation de la memoire temporaire
+  free(reverseBuffer);//liberation de la memoire temporaire
 }
 
 int oneCharHexToInt(char hex) { //conversion d'un seul caractere representant un no en hexo en int
@@ -177,8 +177,8 @@ int hexToInt(char* hex) { //conversion d'un nb hexa en int
 
 /*calcul de la checkSum -> least significant byte de la somme de tous les octets sauf les octets de SYNC */
 void calculateCheckSum(struct trame* trameAEnv) { 
-  char* checkSum = (char*) gMalloc(sizeof (char[2]));
-  char* lSB = (char*) gMalloc(sizeof (char[2]));
+  char* checkSum = (char*) malloc(sizeof (char[2]));
+  char* lSB = (char*) malloc(sizeof (char[2]));
   int sum = 0, i;
   memset(lSB, '\0', 2);
   for (i = 0; i < 8; i = i + 2) {
@@ -209,7 +209,7 @@ void calculateCheckSum(struct trame* trameAEnv) {
   lSB[0] = checkSum[1];
   lSB[1] = checkSum[0];
   trameAEnv->CHECKSUM = lSB;
-  gFree(checkSum);
+  free(checkSum);
 }
 
 void createMessageOpen(char id[SIZE_ID], char* trameToSend) {
@@ -222,9 +222,9 @@ void createMessageOpen(char id[SIZE_ID], char* trameToSend) {
   //ID= FF9F1E05
   //STATUS : 0
   //CHECKSUM:least significant byte from addition of all bytes except for sync and checksum*/
-  struct trame* trameAEnvoyer = (struct trame*) gMalloc(sizeof (struct trame));
+  struct trame* trameAEnvoyer = (struct trame*) malloc(sizeof (struct trame));
   memset(trameAEnvoyer, '\0', sizeof (struct trame));
-  // char* checkSum = (char*)gMalloc(sizeof(char[2]));
+  // char* checkSum = (char*)malloc(sizeof(char[2]));
   //char* trameToSend;
   trameAEnvoyer->DATA = "50000000";
   trameAEnvoyer->HEADER = "6";
@@ -244,7 +244,7 @@ void createMessageOpen(char id[SIZE_ID], char* trameToSend) {
   strcat(trameToSend, trameAEnvoyer->STATUS);
   strcat(trameToSend, trameAEnvoyer->CHECKSUM);
   //strcat(trameToSend, '\0');
-  gFree(trameAEnvoyer);
+  free(trameAEnvoyer);
   //return trameToSend;
 }
 
@@ -258,8 +258,8 @@ void createMessageClose(char id[SIZE_ID], char* trameToSend) {
   //ID= FF9F1E05
   //STATUS : 0
   //CHECKSUM:least significant byte from addition of all bytes except for sync and checksum*/
-  struct trame* trameAEnvoyer = (struct trame*) gMalloc(sizeof (struct trame));
-  // char* checkSum = (char*)gMalloc(sizeof(char[2]));
+  struct trame* trameAEnvoyer = (struct trame*) malloc(sizeof (struct trame));
+  // char* checkSum = (char*)malloc(sizeof(char[2]));
   //char* trameToSend;
   trameAEnvoyer->DATA = "70000000";
   trameAEnvoyer->HEADER = "6";
@@ -280,7 +280,7 @@ void createMessageClose(char id[SIZE_ID], char* trameToSend) {
   strcat(trameToSend, trameAEnvoyer->STATUS);
   strcat(trameToSend, trameAEnvoyer->CHECKSUM);
 
-  gFree(trameAEnvoyer);
+  free(trameAEnvoyer);
 
 }
 
@@ -433,20 +433,20 @@ void setActionneurFct(struct actionFct_t * a, char fctName[SIZE_NAME]) {
 }
 /*methode qui ferme le circuit commande par l'actionneur prise*/
 void openCOURRANT(char id[SIZE_ID]) {
-  char* trame = (char*) gMalloc(sizeof (char[28]));
+  char* trame = (char*) malloc(sizeof (char[28]));
   memset(trame, '\0', 28);
   createMessageOpen(id, trame);
   sensorsNetworkSend(trame, 28);
-  gFree(trame);
+  free(trame);
 }
 
 /*methode qui ouvre le circuit commande par l'actionneur prise*/
 void closeCOURRANT(char id[SIZE_ID]) {
-  char* trame = (char*) gMalloc(sizeof (char[28]));
+  char* trame = (char*) malloc(sizeof (char[28]));
   memset(trame, '\0', 28);
   createMessageClose(id, trame);
   sensorsNetworkSend(trame, 28);
-  gFree(trame);
+  free(trame);
 }
 
 void openCAFFE(char id[SIZE_ID]) {
@@ -479,7 +479,7 @@ void cleanActionneurs(){
   while(actionneurs != NULL){
     cActionneur = actionneurs;
     actionneurs = actionneurs->nextActionneur;
-    gFree(cActionneur);
+    free(cActionneur);
   }
 
 }

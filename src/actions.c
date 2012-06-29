@@ -38,11 +38,11 @@ void cleanActions(){
     while(actions->actionFcts != NULL){
       cActionFct = actions->actionFcts;
       actions->actionFcts = actions->actionFcts->nextActionFct;
-      gFree(cActionFct);
+      free(cActionFct);
     }
     cAction = actions;
     actions = actions->nextAction;
-    gFree(cAction);
+    free(cAction);
   }
 
 }
